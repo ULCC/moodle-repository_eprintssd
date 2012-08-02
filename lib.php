@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This plugin is used to access youtube videos
+
  *
  * @since 2.0
  * @package    repository_eprintssd
@@ -45,6 +45,7 @@ class repository_eprintssd extends repository {
      */
   public function __construct($repositoryid, $context = SYSCONTEXTID, $options = array()) {
         parent::__construct($repositoryid, $context, $options);
+      $this->_options['pluginname'] = 'eprintssd';
     }
 
     public function check_login() {
@@ -103,11 +104,11 @@ class repository_eprintssd extends repository {
      */
     private function _get_collection($keyword, $start, $max, $sort) {
         $list = array();
-        $this->feed_url = 'http://gdata.youtube.com/feeds/api/videos?q=' . urlencode($keyword) . '&format=5&start-index=' . $start . '&max-results=' .$max . '&orderby=' . $sort;
+        $this->feed_url = 'http://merez.ulcc.ac.uk/cgi/soap/SerchServ?q=' . urlencode($keyword) . '&format=5&start-index=' . $start . '&max-results=' .$max . '&orderby=' . $sort;
         $c = new curl(array('cache'=>true, 'module_cache'=>'repository'));
         $content = $c->get($this->feed_url);
         $xml = simplexml_load_string($content);
-        $media = $xml->entry->children('http://search.yahoo.com/mrss/');
+        $media = $xml->entry->children('http://merez.ulcc.ac.uk/cgi/soap/SerchServ');
         $links = $xml->children('http://www.w3.org/2005/Atom');
         foreach ($xml->entry as $entry) {
             $media = $entry->children('http://search.yahoo.com/mrss/');
@@ -120,7 +121,7 @@ class repository_eprintssd extends repository {
             $thumbnail = $attrs['url'];
             $arr = explode('/', $entry->id);
             $id = $arr[count($arr)-1];
-            $source = 'http://www.youtube.com/v/' . $id . '#' . $title;
+            $source = 'http://merez.ulcc.ac.uk/cgi/soap/SerchServ/' . $id . '#' . $title;
             $list[] = array(
                 'shorttitle'=>$title,
                 'thumbnail_title'=>$description,
@@ -192,7 +193,7 @@ class repository_eprintssd extends repository {
      * @return array
      */
     public function supported_filetypes() {
-        return array('*.*');
+        return array('*');
     }
 
     /**
@@ -200,6 +201,6 @@ class repository_eprintssd extends repository {
      * @return int
      */
     public function supported_returntypes() {
-        return FILE_EXTERNAL;
+        return FILE_INTERNAL;
     }
 }
