@@ -23,10 +23,10 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'ePrints Search and Download';
-$string['search'] = 'Search repository';
-$string['eprintssd:view'] = 'Use ePreints Search and Download in file picker';
-$string['configplugin'] = 'YePreints Search and Download repository type configuration';
+$string['pluginname'] = 'Alto Search and Download';
+$string['search'] = 'Search Alto Repository';
+$string['eprintssd:view'] = 'Use Alto Search and Download in file picker';
+$string['configplugin'] = 'Alto Search and Download repository type configuration';
 $string['sortby'] = 'Sort By';
 $string['byyearoldestfirst'] = 'By Year (oldest first)';
 $string['byyearmostrecentfirst'] = 'By Year (most recent first)';
