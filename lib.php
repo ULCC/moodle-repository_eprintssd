@@ -95,7 +95,6 @@ class repository_eprintssd extends repository {
      */
     private function _get_collection($keyword, $start, $max, $sort) {
         global $CFG;
-//-----------------------------------------gregp
 
         //$client = new SoapClient('http://'.$this->srwhost.':'.$this->srwport.$this->srwpath);
 
@@ -162,7 +161,6 @@ class repository_eprintssd extends repository {
 
         return $results;
 
-//-----------------------------------------
     }
 
 
