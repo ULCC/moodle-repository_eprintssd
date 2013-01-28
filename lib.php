@@ -102,7 +102,7 @@ class repository_eprintssd extends repository {
         $client = new EpClient();
 
         $client->fileds = array('fileds' => 'title');
-        $client->key = $keyword;
+        $client->key = $_POST['title'];
         $resultIds = $client->search();
         if (!empty($resultIds )){
             $searchMeta = new EpClient();
